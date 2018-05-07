@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Web2.Models;
@@ -38,6 +39,23 @@ namespace Web2.Controllers
             var Users = UserManager.Users;
             
             return View(Users);
+        }
+
+        public ActionResult Delete()
+        {
+            var Users = UserManager.Users;
+            ViewBag.Title = Users.First().UserName;
+            return View();
+        }
+
+
+        [HttpPost, ActionName("DirectDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DirectDelete(string id)
+        {
+            ApplicationUser user = await UserManager.FindByIdAsync(id);
+            UserManager.DeleteAsync(user);
+            return RedirectToAction("UserTable");
         }
     }
 }

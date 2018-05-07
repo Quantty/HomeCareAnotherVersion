@@ -33,5 +33,7 @@ namespace Web2.Models
         //public System.Data.Entity.DbSet<Web2.Models.ApplicationUser> ApplicationUsers { get; set; }
 
         //public System.Data.Entity.DbSet<Web2.Models.ApplicationUser> ApplicationUsers { get; set; }
+
+        //public System.Data.Entity.DbSet<Web2.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
