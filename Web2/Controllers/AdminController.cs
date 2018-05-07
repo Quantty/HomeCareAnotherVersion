@@ -47,9 +47,7 @@ namespace Web2.Controllers
             ViewBag.Title = Users.First().UserName;
             return View();
         }
-
-
-        [HttpPost, ActionName("DirectDelete")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DirectDelete(string id)
         {
