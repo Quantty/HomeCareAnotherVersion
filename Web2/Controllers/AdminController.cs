@@ -26,10 +26,11 @@ namespace Web2.Controllers
         // GET: Admin
 
        
-        public ActionResult Index()
+        public  ActionResult Index()
         {
             var Users = UserManager.Users;
-            ViewBag.Title = Users.First().UserName;
+            //Users.First().Roles.First().ToString();
+            ViewBag.Title =  UserManager.GetRolesAsync(Users.First().Id).Result.First();
             return View();
         }
         public ActionResult UserTable()
