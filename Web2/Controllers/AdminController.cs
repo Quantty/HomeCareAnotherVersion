@@ -47,12 +47,14 @@ namespace Web2.Controllers
             ViewBag.Title = Users.First().UserName;
             return View();
         }
+
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DirectDelete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
-            ApplicationUser user = await UserManager.FindByIdAsync(id);
-            UserManager.DeleteAsync(user);
+            var user = await UserManager.FindByIdAsync(id);
+            await UserManager.DeleteAsync(user);
             return RedirectToAction("UserTable");
         }
     }
