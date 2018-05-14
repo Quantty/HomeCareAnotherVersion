@@ -55,7 +55,6 @@ namespace Web2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(string id)
         {
-<<<<<<< HEAD
             ApplicationUser user = await UserManager.FindByIdAsync(id);
             await UserManager.DeleteAsync(user);
             return RedirectToAction("UserTable");
@@ -71,25 +70,20 @@ namespace Web2.Controllers
         {
             if (ModelState.IsValid)
             {
-                Console.WriteLine("is valid");
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    Console.WriteLine("succeeded");
                     var roleName = Request["UserRole"];
                     await UserManager.AddToRoleAsync(user.Id, roleName);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("UserTable");
                 }
-                return RedirectToAction("sadasdas");
+                ViewBag.Title = "result didn't succeed";
+                return RedirectToAction("UserTable");
             }
 
             // If we got this far, something failed, redisplay form
-=======
-            var user = await UserManager.FindByIdAsync(id);
-            await UserManager.DeleteAsync(user);
->>>>>>> 0f3efe61fdd32a02358b261d412e75f6f4aa14b8
             return RedirectToAction("UserTable");
         }
     }
