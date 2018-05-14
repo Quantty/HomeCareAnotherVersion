@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +53,35 @@ namespace Web2.Controllers
         public async Task<ActionResult> DirectDelete(string id)
         {
             ApplicationUser user = await UserManager.FindByIdAsync(id);
-            UserManager.DeleteAsync(user);
+            await UserManager.DeleteAsync(user);
+            return RedirectToAction("UserTable");
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost, ActionName("Create")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Console.WriteLine("is valid");
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    Console.WriteLine("succeeded");
+                    var roleName = Request["UserRole"];
+                    await UserManager.AddToRoleAsync(user.Id, roleName);
+
+                    return RedirectToAction("Index", "Home");
+                }
+                return RedirectToAction("sadasdas");
+            }
+
+            // If we got this far, something failed, redisplay form
             return RedirectToAction("UserTable");
         }
     }

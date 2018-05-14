@@ -12,7 +12,7 @@ namespace Web2
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            //createRolesandUsersAsync();
+            createRolesandUsersAsync();
 
         }
 
