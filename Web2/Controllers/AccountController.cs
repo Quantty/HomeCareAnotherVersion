@@ -80,6 +80,12 @@ namespace Web2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    switch (UserManager.GetRolesAsync(UserManager.FindByEmail(model.Email).Id).Result.First())
+                    {
+                        case "Admin": return RedirectToAction("../Admin/Index");
+                        case "Customer": return View();
+                        case "Employee": return View();
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -91,6 +97,7 @@ namespace Web2.Controllers
                     return View(model);
             }
         }
+        
 
         //
         // GET: /Account/VerifyCode

@@ -29,10 +29,11 @@ namespace Web2.Controllers
         // GET: Admin
 
        
-        public ActionResult Index()
+        public  ActionResult Index()
         {
             var Users = UserManager.Users;
-            ViewBag.Title = Users.First().UserName;
+            //Users.First().Roles.First().ToString();
+            ViewBag.Title =  UserManager.GetRolesAsync(Users.First().Id).Result.First();
             return View();
         }
         public ActionResult UserTable()
@@ -48,10 +49,13 @@ namespace Web2.Controllers
             ViewBag.Title = Users.First().UserName;
             return View();
         }
+
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DirectDelete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
+<<<<<<< HEAD
             ApplicationUser user = await UserManager.FindByIdAsync(id);
             await UserManager.DeleteAsync(user);
             return RedirectToAction("UserTable");
@@ -82,6 +86,10 @@ namespace Web2.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+=======
+            var user = await UserManager.FindByIdAsync(id);
+            await UserManager.DeleteAsync(user);
+>>>>>>> 0f3efe61fdd32a02358b261d412e75f6f4aa14b8
             return RedirectToAction("UserTable");
         }
     }
