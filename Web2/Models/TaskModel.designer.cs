@@ -30,9 +30,9 @@ namespace Web2.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertTask(Task instance);
-    partial void UpdateTask(Task instance);
-    partial void DeleteTask(Task instance);
+    partial void InsertCustomerTask(CustomerTask instance);
+    partial void UpdateCustomerTask(CustomerTask instance);
+    partial void DeleteCustomerTask(CustomerTask instance);
     #endregion
 		
 		public TaskModelDataContext() : 
@@ -65,17 +65,17 @@ namespace Web2.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Task> Tasks
+		public System.Data.Linq.Table<CustomerTask> CustomerTasks
 		{
 			get
 			{
-				return this.GetTable<Task>();
+				return this.GetTable<CustomerTask>();
 			}
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Task")]
-	public partial class Task : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class CustomerTask : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -98,7 +98,7 @@ namespace Web2.Models
     partial void OndescriptionChanged();
     #endregion
 		
-		public Task()
+		public CustomerTask()
 		{
 			OnCreated();
 		}

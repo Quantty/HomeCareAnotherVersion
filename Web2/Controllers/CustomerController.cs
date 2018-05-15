@@ -13,5 +13,11 @@ namespace Web2.Controllers
         {
             return View();
         }
+
+        public ActionResult TaskList()
+        {
+            //var Tasks = othermanager.Tasks;
+            return View(/*Tasks*/);
+        }
     }
 }
