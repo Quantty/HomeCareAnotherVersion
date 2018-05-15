@@ -20,12 +20,12 @@ namespace Web2.Controllers
                          select m);
             return tasks;
         }
-        /*public void addUser(User user)
+        public void addTask(CustomerTask task)
         {
-            var dataContext = new UserDataContext();
-            dataContext.Users.InsertOnSubmit(user);
+            var dataContext = new TaskModelDataContext();
+            dataContext.CustomerTasks.InsertOnSubmit(task);
             dataContext.SubmitChanges();
-        }
+        }/*
         public User getUserById(int? id)
         {
            

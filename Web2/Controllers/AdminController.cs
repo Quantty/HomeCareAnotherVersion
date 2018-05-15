@@ -14,6 +14,8 @@ namespace Web2.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
+        private DbWrapper DBLink = new DbWrapper();
+
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
         {
@@ -50,11 +52,27 @@ namespace Web2.Controllers
             ViewBag.Title = Users.First().UserName;
             return View();
         }
-        public ActionResult TaskManage()
+        public ActionResult TaskList()
+        {
+            var tasks = DBLink.GetTasks();
+
+            return View(tasks);
+        }
+
+
+        [HttpPost, ActionName("CreateTask")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateTask(CustomerTask task)
+        {
+            DBLink.addTask(task);
+            return RedirectToAction("TaskList");
+        }
+
+        [HttpGet]
+        public ActionResult CreateTask()
         {
             return View();
         }
-        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(string id)
