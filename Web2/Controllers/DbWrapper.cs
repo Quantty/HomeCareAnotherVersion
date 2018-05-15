@@ -20,7 +20,6 @@ namespace Web2.Controllers
                          select m);
             return tasks;
         }
-        public void addTask(CustomerTask task)
 
         public IQueryable<Schedule> GetSchedules()
         {
@@ -29,46 +28,46 @@ namespace Web2.Controllers
                          select m);
             return schedules;
         }
-        /*public void addUser(User user)
+        public void addTask(CustomerTask task)
         {
             var dataContext = new TaskModelDataContext();
             dataContext.CustomerTasks.InsertOnSubmit(task);
             dataContext.SubmitChanges();
-        }/*
-        public User getUserById(int? id)
+        }
+
+
+        public CustomerTask getTaskById(int? id)
         {
            
-            var dataContext = new UserDataContext();
-            var query = (from m in dataContext.Users
+            var dataContext = new TaskModelDataContext();
+            var query = (from m in dataContext.CustomerTasks
                             where m.Id == id
                             select m);
-            User user = query.First();
+            CustomerTask task = query.First();
 
-            return user;
+            return task;
             
         }
-
-        public void updateUser(int id , User user)
+        
+        public void updateTask(CustomerTask task)
         {
-            var dataContext = new UserDataContext();
-            var query = (from m in dataContext.Users
-                         where m.Id == id
+            var dataContext = new TaskModelDataContext();
+            var query = (from m in dataContext.CustomerTasks
+                         where m.Id == task.Id
                          select m);
-            query.First().Id = user.Id;
-            query.First().username = user.username;
-            query.First().password = user.password;
-            query.First().type = user.type;
+            query.First().title = task.title;
+            query.First().description = task.description;
             dataContext.SubmitChanges();
         }
-
-        public void deleteUserById(int? id)
+        
+        public void deleteTaskById(int? id)
         {
-            var dataContext = new UserDataContext();
-            var query = (from m in dataContext.Users
+            var dataContext = new TaskModelDataContext();
+            var query = (from m in dataContext.CustomerTasks
                          where m.Id == id
                          select m);
-            dataContext.Users.DeleteOnSubmit(query.First());
+            dataContext.CustomerTasks.DeleteOnSubmit(query.First());
             dataContext.SubmitChanges();
-        }*/
+        }
     }
 }

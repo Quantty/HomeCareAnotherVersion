@@ -67,6 +67,38 @@ namespace Web2.Controllers
             DBLink.addTask(task);
             return RedirectToAction("TaskList");
         }
+        [HttpPost, ActionName("EditTask")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditTask(CustomerTask task)
+        {
+            DBLink.updateTask(task);
+            return RedirectToAction("TaskList");
+        }
+
+        [HttpPost, ActionName("DeleteTask")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteTask(CustomerTask task)
+        {
+            DBLink.deleteTaskById(task.Id);
+            return RedirectToAction("TaskList");
+        }
+       
+      
+        public ActionResult EditTask(int id)
+        {
+
+            return View(DBLink.getTaskById(id));
+        }
+
+        public ActionResult DeleteTask()
+        {
+            return View();
+        }
+
+        public ActionResult DetailsTask(int id)
+        {
+            return View(DBLink.getTaskById(id));
+        }
 
         [HttpGet]
         public ActionResult CreateTask()
