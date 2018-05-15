@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using test.Models;
+using Web2.Models;
 
-namespace test.Controllers
+namespace Web2.Controllers
 {
     public class DbWrapper : Controller
     {
@@ -13,14 +13,14 @@ namespace test.Controllers
         {
 
         }
-        public IQueryable<User> getUsers()
+        public IQueryable<CustomerTask> GetTasks()
         {
-            var dataContext = new UserDataContext();
-            var users = (from m in dataContext.Users
+            var dataContext = new TaskModelDataContext();
+            var tasks = (from m in dataContext.CustomerTasks
                          select m);
-            return users;
+            return tasks;
         }
-        public void addUser(User user)
+        /*public void addUser(User user)
         {
             var dataContext = new UserDataContext();
             dataContext.Users.InsertOnSubmit(user);
@@ -60,6 +60,6 @@ namespace test.Controllers
                          select m);
             dataContext.Users.DeleteOnSubmit(query.First());
             dataContext.SubmitChanges();
-        }
+        }*/
     }
 }

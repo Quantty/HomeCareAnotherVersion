@@ -8,6 +8,7 @@ namespace Web2.Controllers
 {
     public class CustomerController : Controller
     {
+ 
         // GET: Customer
         public ActionResult Index()
         {
@@ -16,8 +17,11 @@ namespace Web2.Controllers
 
         public ActionResult TaskList()
         {
+            var cont = new DbWrapper();
+            
             //var Tasks = othermanager.Tasks;
-            return View(/*Tasks*/);
+            var tasks = cont.GetTasks();
+            return View(tasks);
         }
     }
 }

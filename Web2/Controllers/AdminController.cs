@@ -50,7 +50,10 @@ namespace Web2.Controllers
             ViewBag.Title = Users.First().UserName;
             return View();
         }
-
+        public ActionResult TaskManage()
+        {
+            return View();
+        }
         
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
