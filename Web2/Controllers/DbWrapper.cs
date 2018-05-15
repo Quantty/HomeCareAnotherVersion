@@ -20,6 +20,14 @@ namespace Web2.Controllers
                          select m);
             return tasks;
         }
+
+        public IQueryable<Schedule> GetSchedules()
+        {
+            var dataContext = new ScheduleModelDataContext();
+            var schedules = (from m in dataContext.Schedules
+                         select m);
+            return schedules;
+        }
         /*public void addUser(User user)
         {
             var dataContext = new UserDataContext();
