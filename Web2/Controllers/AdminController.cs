@@ -77,6 +77,7 @@ namespace Web2.Controllers
                     var roleName = Request["UserRole"];
                     await UserManager.AddToRoleAsync(user.Id, roleName);
 
+                    ViewBag.Title = "user " + model.Email + " successfully created";
                     return RedirectToAction("UserTable");
                 }
                 ViewBag.Title = "result didn't succeed";
@@ -84,6 +85,41 @@ namespace Web2.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            return RedirectToAction("UserTable");
+        }
+
+        public ActionResult Edit()
+        {
+            return View();
+        }
+        
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(ApplicationUser model)
+        {
+            ApplicationUser user = await UserManager.FindByIdAsync(model.Id);
+            if (user == null)
+            {
+                ViewBag.title = "user not found";
+                return RedirectToAction("UserTable");
+            }
+            var newPassword = Request["Password"];
+            if (newPassword.Length > 0)
+                user.PasswordHash = UserManager.PasswordHasher.HashPassword(newPassword);
+            var roleName = Request["UserRole"];
+            if (roleName.Length > 0) {
+                var roles = await UserManager.GetRolesAsync(user.Id);
+                await UserManager.RemoveFromRolesAsync(user.Id, roles.ToArray());
+                await UserManager.AddToRoleAsync(user.Id, roleName);
+            }
+            user.UserName = model.Email;
+            user.Email = model.Email;
+
+            var result = await UserManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                //throw exception......
+            }
             return RedirectToAction("UserTable");
         }
     }
