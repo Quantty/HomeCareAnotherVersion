@@ -11,6 +11,7 @@ using Web2.Models;
 
 namespace Web2.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private ApplicationUserManager _userManager;

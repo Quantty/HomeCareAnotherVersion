@@ -83,7 +83,7 @@ namespace Web2.Controllers
                     switch (UserManager.GetRolesAsync(UserManager.FindByEmail(model.Email).Id).Result.First())
                     {
                         case "Admin": return RedirectToAction("../Admin/Index");
-                        case "Customer": return View();
+                        case "Customer": return RedirectToAction("../Customer/Index");
                         case "Employee": return View();
                     }
                     return RedirectToLocal(returnUrl);
@@ -175,7 +175,7 @@ namespace Web2.Controllers
                     //Assign Role to user Here   
                     //await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("../Customer/Index");
                 }
                 AddErrors(result);
             }

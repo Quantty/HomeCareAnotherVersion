@@ -10,7 +10,7 @@ namespace Web2.Controllers
 {
     public class CitrusController : ApiController
     {
-        // GET api/<controller>
+        // GET api/Citrus
         public List<Citrus> Get()
         {
             List<Citrus> citruses = new List<Citrus>();
@@ -23,7 +23,7 @@ namespace Web2.Controllers
             return citruses;
         }
 
-        // GET api/<controller>/5
+        // GET api/Citrus/3
         public Citrus Get(int id)
         {
             List<Citrus> citruses = new List<Citrus>();
