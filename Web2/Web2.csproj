@@ -315,6 +315,8 @@
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Admin\TaskList.cshtml" />
     <Content Include="Views\Admin\CreateTask.cshtml" />
+    <Content Include="Views\Admin\TaskManage\Index.cshtml" />
+    <Content Include="Views\Customer\TaskList.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

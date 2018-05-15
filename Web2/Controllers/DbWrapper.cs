@@ -21,6 +21,15 @@ namespace Web2.Controllers
             return tasks;
         }
         public void addTask(CustomerTask task)
+
+        public IQueryable<Schedule> GetSchedules()
+        {
+            var dataContext = new ScheduleModelDataContext();
+            var schedules = (from m in dataContext.Schedules
+                         select m);
+            return schedules;
+        }
+        /*public void addUser(User user)
         {
             var dataContext = new TaskModelDataContext();
             dataContext.CustomerTasks.InsertOnSubmit(task);
