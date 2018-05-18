@@ -82,7 +82,7 @@ namespace Web2.Controllers
                 case SignInStatus.Success:
                     switch (UserManager.GetRolesAsync(UserManager.FindByEmail(model.Email).Id).Result.First())
                     {
-                        case "Admin": return RedirectToAction("../Admin/Index");
+                        case "Admin": return RedirectToAction("../Admin/UserTable");
                         case "Customer": return RedirectToAction("../Customer/Index");
                         case "Employee": return View();
                     }
