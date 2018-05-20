@@ -86,6 +86,8 @@ namespace Web2.Models
 		
 		private string _description;
 		
+		private System.Nullable<System.TimeSpan> _duration;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -96,6 +98,8 @@ namespace Web2.Models
     partial void OntitleChanged();
     partial void OndescriptionChanging(string value);
     partial void OndescriptionChanged();
+    partial void OndurationChanging(System.Nullable<System.TimeSpan> value);
+    partial void OndurationChanged();
     #endregion
 		
 		public CustomerTask()
@@ -159,6 +163,26 @@ namespace Web2.Models
 					this._description = value;
 					this.SendPropertyChanged("description");
 					this.OndescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_duration", DbType="Time")]
+		public System.Nullable<System.TimeSpan> duration
+		{
+			get
+			{
+				return this._duration;
+			}
+			set
+			{
+				if ((this._duration != value))
+				{
+					this.OndurationChanging(value);
+					this.SendPropertyChanging();
+					this._duration = value;
+					this.SendPropertyChanged("duration");
+					this.OndurationChanged();
 				}
 			}
 		}

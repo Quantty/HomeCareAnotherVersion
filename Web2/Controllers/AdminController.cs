@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -90,9 +91,10 @@ namespace Web2.Controllers
             return View(DBLink.getTaskById(id));
         }
 
-        public ActionResult DeleteTask()
+        public ActionResult DeleteTask(int id)
         {
-            return View();
+
+            return View(DBLink.getTaskById(id));
         }
 
         public ActionResult DetailsTask(int id)
@@ -105,6 +107,117 @@ namespace Web2.Controllers
         {
             return View();
         }
+
+        public List<ApplicationUser> getEmployees()
+        {
+            List<ApplicationUser> employeeUsers = new List<ApplicationUser>();
+
+            foreach (ApplicationUser user in UserManager.Users)
+            {
+                if (!user.Roles.First().Equals("Employee"))
+                {
+                    employeeUsers.Add(user);
+                }
+            }
+            return employeeUsers;
+        }
+
+        public List<ApplicationUser> getCustomers()
+        {
+            List<ApplicationUser> customersUsers = new List<ApplicationUser>();
+
+            foreach (ApplicationUser user in UserManager.Users)
+            {
+                if (!user.Roles.First().Equals("Customer"))
+                {
+                    customersUsers.Add(user);
+                }
+            }
+            return customersUsers;
+        }
+
+        public async Task<ActionResult> ScheduleList()
+        {
+            var schedule = DBLink.GetSchedules();
+            var employeeUsers = getEmployees();
+            var customerUsers = getCustomers();
+
+            List<MixViewModel> scheduleList = new List<MixViewModel>();
+
+            foreach (var sched in schedule)
+            {
+                MixViewModel mymodel = new MixViewModel();
+                var userE = await UserManager.FindByIdAsync(sched.employee_Id +"");
+                var userC = await UserManager.FindByIdAsync(sched.customer_Id + "");
+
+                mymodel.employee = userE;
+                mymodel.schedule = sched;
+                mymodel.customer = userC;
+                mymodel.task = DBLink.getTaskById(sched.task_Id);
+
+                scheduleList.Add(mymodel);
+
+            }
+            return View(scheduleList);
+        }
+
+
+        [HttpPost, ActionName("CreateSchedule")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateSchedule(Schedule schedule)
+        {
+            DBLink.addSchedule(schedule);
+    
+            return RedirectToAction("ScheduleList");
+        }
+        [HttpPost, ActionName("EditSchedule")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditSchedule(Schedule schedule)
+        {
+            DBLink.updateSchedule(schedule);
+            return RedirectToAction("ScheduleList");
+        }
+
+        [HttpPost, ActionName("DeleteSchedule")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteSchedule(Schedule schedule)
+        {
+            DBLink.deleteScheduleById(schedule.Id);
+            return RedirectToAction("ScheduleList");
+        }
+
+
+        public ActionResult EditSchedule(int id)
+        {
+            ViewBag.customers = getCustomers();
+            ViewBag.employees = getEmployees();
+            ViewBag.tasks = DBLink.GetTasks();
+            return View(DBLink.getScheduleById(id));
+        }
+
+        public ActionResult DeleteSchedule(int id)
+        {
+            var schedule = DBLink.getScheduleById(id);
+            return View(schedule);
+        }
+
+        public ActionResult DetailsSchedule(int id)
+        {
+            var schedule = DBLink.getScheduleById(id);
+           
+            return View(schedule);
+        }
+
+        [HttpGet]
+        public ActionResult CreateSchedule()
+        {
+            ViewBag.tasks = DBLink.GetTasks().ToList();
+            ViewBag.customers = getCustomers();
+            ViewBag.employees = getEmployees();
+
+            return View();
+        }
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(string id)

@@ -82,13 +82,15 @@ namespace Web2.Models
 		
 		private int _Id;
 		
-		private System.Nullable<int> _client_Id;
+		private string _employee_Id;
 		
-		private System.Nullable<int> _customer_Id;
+		private string _customer_Id;
 		
 		private System.Nullable<int> _task_Id;
 		
-		private System.Nullable<System.DateTime> _date;
+		private string _date;
+		
+		private System.Nullable<System.TimeSpan> _time;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -96,14 +98,16 @@ namespace Web2.Models
     partial void OnCreated();
     partial void OnIdChanging(int value);
     partial void OnIdChanged();
-    partial void Onclient_IdChanging(System.Nullable<int> value);
-    partial void Onclient_IdChanged();
-    partial void Oncustomer_IdChanging(System.Nullable<int> value);
+    partial void Onemployee_IdChanging(string value);
+    partial void Onemployee_IdChanged();
+    partial void Oncustomer_IdChanging(string value);
     partial void Oncustomer_IdChanged();
     partial void Ontask_IdChanging(System.Nullable<int> value);
     partial void Ontask_IdChanged();
-    partial void OndateChanging(System.Nullable<System.DateTime> value);
+    partial void OndateChanging(string value);
     partial void OndateChanged();
+    partial void OntimeChanging(System.Nullable<System.TimeSpan> value);
+    partial void OntimeChanged();
     #endregion
 		
 		public Schedule()
@@ -131,28 +135,28 @@ namespace Web2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_client_Id", DbType="Int")]
-		public System.Nullable<int> client_Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_employee_Id", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string employee_Id
 		{
 			get
 			{
-				return this._client_Id;
+				return this._employee_Id;
 			}
 			set
 			{
-				if ((this._client_Id != value))
+				if ((this._employee_Id != value))
 				{
-					this.Onclient_IdChanging(value);
+					this.Onemployee_IdChanging(value);
 					this.SendPropertyChanging();
-					this._client_Id = value;
-					this.SendPropertyChanged("client_Id");
-					this.Onclient_IdChanged();
+					this._employee_Id = value;
+					this.SendPropertyChanged("employee_Id");
+					this.Onemployee_IdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customer_Id", DbType="Int")]
-		public System.Nullable<int> customer_Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customer_Id", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string customer_Id
 		{
 			get
 			{
@@ -191,8 +195,8 @@ namespace Web2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="Date")]
-		public System.Nullable<System.DateTime> date
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string date
 		{
 			get
 			{
@@ -207,6 +211,26 @@ namespace Web2.Models
 					this._date = value;
 					this.SendPropertyChanged("date");
 					this.OndateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_time", DbType="Time")]
+		public System.Nullable<System.TimeSpan> time
+		{
+			get
+			{
+				return this._time;
+			}
+			set
+			{
+				if ((this._time != value))
+				{
+					this.OntimeChanging(value);
+					this.SendPropertyChanging();
+					this._time = value;
+					this.SendPropertyChanged("time");
+					this.OntimeChanged();
 				}
 			}
 		}

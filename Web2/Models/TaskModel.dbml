@@ -5,6 +5,7 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="title" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="duration" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

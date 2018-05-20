@@ -1,0 +1,59 @@
+﻿@model Web2.Models.Schedule
+
+@{
+    ViewBag.Title = "DetailsSchedule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DetailsSchedule</h2>
+
+<div>
+    <h4>Schedule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.employee_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employee_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customer_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customer_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.task_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.task_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.time)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditSchedule", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "ScheduleList")
+</p>

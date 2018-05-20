@@ -34,7 +34,12 @@ namespace Web2.Controllers
             dataContext.CustomerTasks.InsertOnSubmit(task);
             dataContext.SubmitChanges();
         }
-
+        public void addSchedule(Schedule schedule)
+        {
+            var dataContext = new ScheduleModelDataContext();
+            dataContext.Schedules.InsertOnSubmit(schedule);
+            dataContext.SubmitChanges();
+        }
 
         public CustomerTask getTaskById(int? id)
         {
@@ -43,12 +48,34 @@ namespace Web2.Controllers
             var query = (from m in dataContext.CustomerTasks
                             where m.Id == id
                             select m);
-            CustomerTask task = query.First();
-
-            return task;
-            
+            var task = query.First();
+            if (task != null) {
+                return task;
+            }
+            else
+            {
+                return null;
+            }            
         }
-        
+
+        public Schedule getScheduleById(int? id)
+        {
+
+            var dataContext = new ScheduleModelDataContext();
+            var query = (from m in dataContext.Schedules
+                         where m.Id == id
+                         select m);
+            var schedule = query.First();
+            if (schedule != null)
+            {
+                return schedule;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public void updateTask(CustomerTask task)
         {
             var dataContext = new TaskModelDataContext();
@@ -56,10 +83,26 @@ namespace Web2.Controllers
                          where m.Id == task.Id
                          select m);
             query.First().title = task.title;
+            query.First().duration = task.duration;
             query.First().description = task.description;
             dataContext.SubmitChanges();
         }
-        
+
+        public void updateSchedule(Schedule schedule)
+        {
+            var dataContext = new ScheduleModelDataContext();
+            var query = (from m in dataContext.Schedules
+                         where m.Id == schedule.Id
+                         select m);
+            var sched = query.First();
+            sched.customer_Id = schedule.customer_Id;
+            sched.employee_Id = schedule.employee_Id;
+            sched.date = schedule.date;
+            sched.task_Id = schedule.task_Id;
+            sched.time = schedule.time;
+            dataContext.SubmitChanges();
+        }
+
         public void deleteTaskById(int? id)
         {
             var dataContext = new TaskModelDataContext();
@@ -67,6 +110,16 @@ namespace Web2.Controllers
                          where m.Id == id
                          select m);
             dataContext.CustomerTasks.DeleteOnSubmit(query.First());
+            dataContext.SubmitChanges();
+        }
+
+        public void deleteScheduleById(int? id)
+        {
+            var dataContext = new ScheduleModelDataContext();
+            var query = (from m in dataContext.Schedules
+                         where m.Id == id
+                         select m);
+            dataContext.Schedules.DeleteOnSubmit(query.First());
             dataContext.SubmitChanges();
         }
     }

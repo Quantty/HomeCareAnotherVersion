@@ -8,12 +8,16 @@
 <h2>Index</h2>
 
 <p>
+    @Html.ActionLink("Back", "Index") |
     @Html.ActionLink("Create New", "CreateTask")
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.duration)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.description)
@@ -27,12 +31,15 @@
             @Html.DisplayFor(modelItem => item.title)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.duration)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "EditTask", new { id=item.Id }) |
-            @Html.ActionLink("Details", "DetailsTask", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "DeleteTask", new { id=item.Id })
+            @Html.ActionLink("Edit", "EditTask", new { id = item.Id }) |
+            @Html.ActionLink("Details", "DetailsTask", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "DeleteTask", new { id = item.Id })
         </td>
     </tr>
 }

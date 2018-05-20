@@ -3,10 +3,11 @@
   <Table Name="dbo.Schedule" Member="Schedules">
     <Type Name="Schedule">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="client_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="customer_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="employee_Id" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="customer_Id" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="task_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="date" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="time" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
