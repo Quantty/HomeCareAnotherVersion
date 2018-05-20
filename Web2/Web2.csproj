@@ -370,6 +370,8 @@
     <Content Include="Views\Admin\DetailsSchedule.cshtml" />
     <Content Include="Views\Admin\DeleteSchedule.cshtml" />
     <Content Include="Views\Admin\EditSchedule.cshtml" />
+    <Content Include="Views\Admin\TaskManage\View.cshtml" />
+    <Content Include="Views\Admin\View.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

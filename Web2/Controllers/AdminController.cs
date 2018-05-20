@@ -46,6 +46,14 @@ namespace Web2.Controllers
             
             return View(Users);
         }
+        [HttpGet]
+        public String newForm()
+        {
+            
+
+            return "Something";
+        }
+
 
         public ActionResult Delete()
         {

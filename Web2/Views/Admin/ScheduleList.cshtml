@@ -7,13 +7,13 @@
 
 <h2>Schedule</h2>
 <td>
-    @Html.ActionLink("Users", "UserTable") |
-    @Html.ActionLink("Tasks", "TaskList") |
-    @Html.ActionLink("Schedule", "ScheduleList")
+    <button onclick="location.href='@Url.Action("UserTable", "Admin")';return false;" class="btn btn-default">Users</button>
+    <button onclick="location.href='@Url.Action("ScheduleList", "Admin")';return false;" class="btn btn-default">Schedule</button>
+    <button onclick="location.href='@Url.Action("TaskList", "Admin")';return false;" class="btn btn-default">Task</button>
 
+    <br><br>
 </td>
 <p>
-    @Html.ActionLink("Back", "Index") |
     @Html.ActionLink("Create New", "CreateSchedule")
 </p>
 <table class="table">
