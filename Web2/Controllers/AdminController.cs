@@ -255,9 +255,15 @@ namespace Web2.Controllers
             return RedirectToAction("UserTable");
         }
 
-        public ActionResult Edit()
+        public async Task<ActionResult> Edit(string id)
         {
-            return View();
+            ApplicationUser user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                ViewBag.title = "user not found";
+                return RedirectToAction("UserTable");
+            }
+            return View(user);
         }
         
         [HttpPost, ActionName("Edit")]
