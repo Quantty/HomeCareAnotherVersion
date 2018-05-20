@@ -14,7 +14,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Schedule</h4>
         <hr />
@@ -56,7 +56,7 @@
         <div class="form-group">
             @Html.Label("Time", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBox("Time", DateTime.Now, new { @class = "form-control", @type = "Time" })
+                @Html.TextBoxFor(Model => Model.time, DateTime.Now.ToShortTimeString(), new { @class = "form-control", @type = "Time" })
                 @Html.ValidationMessageFor(model => model.time, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -72,3 +72,6 @@
 <div>
     @Html.ActionLink("Back to List", "ScheduleList")
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

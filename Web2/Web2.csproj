@@ -286,6 +286,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Models\TaskModel.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>TaskModel.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Models\ScheduleModel.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>ScheduleModel.designer.cs</LastGenOutput>
@@ -294,11 +299,6 @@
     <None Include="Models\ScheduleModel.dbml.layout">
       <DependentUpon>ScheduleModel.dbml</DependentUpon>
     </None>
-    <Content Include="Models\TaskModel.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>TaskModel.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="Models\TaskModel.dbml.layout">
       <DependentUpon>TaskModel.dbml</DependentUpon>
     </None>
@@ -357,11 +357,8 @@
     <Content Include="Views\Admin\Delete.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
-    <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Admin\TaskList.cshtml" />
     <Content Include="Views\Admin\CreateTask.cshtml" />
-    <Content Include="Views\Admin\TaskManage\Index.cshtml" />
-    <Content Include="Views\Customer\TaskList.cshtml" />
     <Content Include="Views\Admin\EditTask.cshtml" />
     <Content Include="Views\Admin\DeleteTask.cshtml" />
     <Content Include="Views\Admin\DetailsTask.cshtml" />
@@ -370,8 +367,8 @@
     <Content Include="Views\Admin\DetailsSchedule.cshtml" />
     <Content Include="Views\Admin\DeleteSchedule.cshtml" />
     <Content Include="Views\Admin\EditSchedule.cshtml" />
-    <Content Include="Views\Admin\TaskManage\View.cshtml" />
-    <Content Include="Views\Admin\View.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Admin\TimeCheck.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

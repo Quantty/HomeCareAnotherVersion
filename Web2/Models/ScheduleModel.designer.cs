@@ -20,9 +20,9 @@ namespace Web2.Models
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-	
-	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="HomeCareDatabase")]
+    using System.ComponentModel.DataAnnotations;
+
+    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="HomeCareDatabase")]
 	public partial class ScheduleModelDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -81,12 +81,12 @@ namespace Web2.Models
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _Id;
+        [Required(AllowEmptyStrings = false)]
+        private string _employee_Id;
+        [Required(AllowEmptyStrings = false)]
+        private string _customer_Id;
 		
-		private string _employee_Id;
-		
-		private string _customer_Id;
-		
-		private System.Nullable<int> _task_Id;
+		private int _task_Id;
 		
 		private string _date;
 		
@@ -102,7 +102,7 @@ namespace Web2.Models
     partial void Onemployee_IdChanged();
     partial void Oncustomer_IdChanging(string value);
     partial void Oncustomer_IdChanged();
-    partial void Ontask_IdChanging(System.Nullable<int> value);
+    partial void Ontask_IdChanging(int value);
     partial void Ontask_IdChanged();
     partial void OndateChanging(string value);
     partial void OndateChanged();
@@ -134,8 +134,8 @@ namespace Web2.Models
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_employee_Id", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+        [Required(AllowEmptyStrings = false)]
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_employee_Id", DbType="VarChar(50) NOT NULL  NOT EMPTY", CanBeNull=false)]
 		public string employee_Id
 		{
 			get
@@ -154,8 +154,8 @@ namespace Web2.Models
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customer_Id", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+        [Required(AllowEmptyStrings = false)]
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customer_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string customer_Id
 		{
 			get
@@ -174,9 +174,9 @@ namespace Web2.Models
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_task_Id", DbType="Int")]
-		public System.Nullable<int> task_Id
+        [Required(AllowEmptyStrings = false)]
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_task_Id", DbType="Int NOT NULL")]
+		public int task_Id
 		{
 			get
 			{
@@ -194,8 +194,8 @@ namespace Web2.Models
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+        [Required(AllowEmptyStrings = false)]
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string date
 		{
 			get

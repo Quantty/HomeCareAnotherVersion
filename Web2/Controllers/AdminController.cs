@@ -46,13 +46,6 @@ namespace Web2.Controllers
             
             return View(Users);
         }
-        [HttpGet]
-        public String newForm()
-        {
-            
-
-            return "Something";
-        }
 
 
         public ActionResult Delete()
@@ -174,10 +167,47 @@ namespace Web2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateSchedule(Schedule schedule)
         {
+            return RedirectToAction("TimeCheck",schedule);
+        }
+
+
+        [HttpGet]
+        public ActionResult TimeCheck(Schedule schedule)
+        {
+            ViewBag.tasks = DBLink.GetTasks().ToList();
+            ViewBag.customers = getCustomers();
+            ViewBag.employees = getEmployees();
+            string hours = "";
+            foreach(var item in DBLink.GetSchedules())
+            {
+                if (item.employee_Id == schedule.employee_Id && item.date == schedule.date)
+                {
+                    hours = hours +item.time+"-"+(item.time+DBLink.getTaskById(item.task_Id).duration)+", ";
+                }
+            }
+            if(hours == "")
+            {
+                ViewBag.busyTime = "All Free";
+            }
+            else
+            {
+                ViewBag.busyTime = hours;
+            }
+
+            return View(schedule);
+        }
+
+        [HttpPost, ActionName("TimeCheck")]
+        [ValidateAntiForgeryToken]
+        public ActionResult TimeConfirmation(Schedule schedule)
+        {
             DBLink.addSchedule(schedule);
-    
             return RedirectToAction("ScheduleList");
         }
+
+
+
+
         [HttpPost, ActionName("EditSchedule")]
         [ValidateAntiForgeryToken]
         public ActionResult EditSchedule(Schedule schedule)
