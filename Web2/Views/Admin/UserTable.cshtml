@@ -47,11 +47,11 @@
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
                     @if (role == "Employee")
                     {
-                        @Html.ActionLink("tasks", "tasksmapping", new { id = item.Id })
+                        @Html.ActionLink("schedules", "EmployeeSchedules", new { id = item.Id })
                     }
                     @if (role == "Customer")
                     {
-                        @Html.ActionLink("relatives", "relativesmapping", new { id = item.Id })
+                        @Html.ActionLink("relatives", "CustomerRelatives", new { id = item.Id })
                     }
                 </td>
             </tr>
