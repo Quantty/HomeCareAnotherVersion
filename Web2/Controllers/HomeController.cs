@@ -33,7 +33,7 @@ namespace Web2.Controllers
 
             return View();
         }
-        [Authorize (Roles = "Admin")]
+    
         public ActionResult Contact()
         {
             string name = User.Identity.Name;
