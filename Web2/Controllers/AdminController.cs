@@ -358,7 +358,7 @@ namespace Web2.Controllers
                 }
 
             }
-            return View(scheduleList);
+            return View("ScheduleList", scheduleList);
         }
 
 
