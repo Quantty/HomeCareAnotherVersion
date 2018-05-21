@@ -12,12 +12,9 @@
     <br><br>
 </td>
 
+<!--schedule table-->
 <table class="table">
     <tr>
-        <th>
-
-            @Html.DisplayName("Employee")
-        </th>
         <th>
             @Html.DisplayName("Date")
         </th>
@@ -38,13 +35,17 @@
     </tr>
     @using Microsoft.AspNet.Identity;
 
+    @using Web2.Models;
+    @{
+        List<CustomerTask> taskList = new List<CustomerTask>();
+    }
+
     @foreach (var item in Model)
     {
-        if (item.employee != null && item.employee.Id == User.Identity.GetUserId()) {
+        if (item.schedule.employee_Id == User.Identity.GetUserId())
+        {
+
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.employee.UserName)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.schedule.date)
                 </td>
@@ -60,11 +61,73 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.task.duration)
                 </td>
+                <td></td>
+            </tr>
+        }
+    }
+
+</table>
+
+<!--task table-->
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Title")
+        </th>
+        <th>
+            @Html.DisplayName("Duration")
+        </th>
+        <th>
+            @Html.DisplayName("Description")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.schedule.employee_Id == User.Identity.GetUserId())
+        {
+            <tr>
                 <td>
-                    @Html.ActionLink("Edit", "EditSchedule", new { id = item.schedule.Id }) |
-                    @Html.ActionLink("Details", "DetailsSchedule", new { id = item.schedule.Id }) |
-                    @Html.ActionLink("Delete", "DeleteSchedule", new { id = item.schedule.Id })
+                    @Html.DisplayFor(modelItem => item.task.title)
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.task.duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.task.description)
+                </td>
+                <td></td>
+            </tr>
+        }
+    }
+
+</table>
+
+<!--customer table-->
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("UserName")
+        </th>
+        <th>
+            @Html.DisplayName("Email")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.schedule.employee_Id == User.Identity.GetUserId())
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer.UserName)
+                </td>
+                <td></td>
             </tr>
         }
     }

@@ -353,7 +353,7 @@ namespace Web2.Controllers
                 mymodel.customer = userC;
                 mymodel.task = DBLink.getTaskById(schedule.task_Id);
 
-                if (userE != null && userE.Id == id) {//if the employee's id is equal to the id we selected in UserList
+                if (schedule.employee_Id == id) {//if the employee's id is equal to the id we selected in UserList
                     scheduleList.Add(mymodel);
                 }
 
