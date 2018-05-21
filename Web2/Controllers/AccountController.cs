@@ -84,7 +84,7 @@ namespace Web2.Controllers
                     {
                         case "Admin": return RedirectToAction("../Admin/ScheduleList");
                         case "Customer": return RedirectToAction("../Customer/Index");
-                        case "Employee": return View();
+                        case "Employee": return RedirectToAction("../Employee/ScheduleList");
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
