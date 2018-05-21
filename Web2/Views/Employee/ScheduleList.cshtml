@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Web2.Models.MixViewModel>
+@using System.Activities.Expressions
 
 @{
     ViewBag.Title = "ScheduleList";
@@ -133,3 +134,90 @@
     }
 
 </table>
+
+
+<style>
+    #map {
+        height: 250px;
+        width: 400px;
+    }
+</style>
+
+<hr />
+<div class="embed-responsive embed-responsive-4by3">
+    <div id="map-container" class="embed-responsive-item">
+        <div id="map">
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        function RouteVisit(date, time, lat, lng) {
+            this.date = date;
+            this.time = time;
+            this.lat = lat;
+            this.lng = lng;
+        }
+
+        var map, infoWindow;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'),
+                {
+                    center: { lat: -34.397, lng: 150.644 },
+                    zoom: 6
+                });
+            infoWindow = new google.maps.InfoWindow;
+
+            let markerIcon = {
+                url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+                size: new google.maps.Size(20, 32),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(0, 32),
+                labelOrigin: new google.maps.Point(40, 33)
+            }
+
+            let visits = new Array();
+            @foreach (var item in Model)
+            {
+                if (item.schedule.employee_Id == User.Identity.GetUserId()) {
+                    @:visits.push(new RouteVisit("21.5.2018", "10:10", 55.703939, 12.5354754));
+                }
+            }
+
+            let bounds = new google.maps.LatLngBounds();
+
+            for (let i = 0; i < visits.length; i++) {
+                let pos = new google.maps.LatLng(visits[i].lat, visits[i].lng);
+                let marker = new google.maps.Marker({
+                    position: pos,
+                    map: map,
+                    clickable: false,
+                    icon: markerIcon,
+                    label: {
+                        text: visits[i].time,
+                        color: "#000000",
+                        fontSize: "16px",
+                        fontWeight: "bold"
+                    }
+                });
+                bounds.extend(pos);
+            }
+
+            google.maps.event.addListenerOnce(map, 'idle', function(event) {
+                this.setZoom(map.getZoom()-1);
+
+                if (this.getZoom() > 16) {
+                    this.setZoom(16);
+                }
+            });
+
+            map.setCenter(bounds.getCenter());
+            map.fitBounds(bounds);
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAffWabXysXAgZRoXTc-MP5_l6r7CNl-v0&callback=initMap">
+    </script>
+}

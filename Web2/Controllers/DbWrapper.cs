@@ -122,5 +122,13 @@ namespace Web2.Controllers
             dataContext.Schedules.DeleteOnSubmit(query.First());
             dataContext.SubmitChanges();
         }
+
+        /*public IQueryable<Relative> GetRelatives()
+        {
+            var dataContext = new RelativeModelDataContext();
+            var relatives = (from m in dataContext.Relatives
+                         select m);
+            return relatives;
+        }*/
     }
 }
