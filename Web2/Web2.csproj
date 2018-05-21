@@ -205,6 +205,7 @@
     <Compile Include="Controllers\CitrusController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DbWrapper.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -370,6 +371,8 @@
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Admin\TimeCheck.cshtml" />
     <Content Include="Views\Admin\EmployeeSchedules.cshtml" />
+    <Content Include="Views\Employee\ScheduleList.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
