@@ -369,6 +369,7 @@
     <Content Include="Views\Admin\EditSchedule.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Admin\TimeCheck.cshtml" />
+    <Content Include="Views\Admin\EmployeeSchedules.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
