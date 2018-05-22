@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using GoogleMaps.LocationServices;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -160,7 +161,14 @@ namespace Web2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var locationService = new GoogleLocationService();
+                var point = locationService.GetLatLongFromAddress(model.Address);
+                var latitude = point.Latitude;
+                var longitude = point.Longitude;
+                var usrnm = model.Email;
+                if (model.UserName != null)
+                    usrnm = model.UserName;
+                var user = new ApplicationUser { UserName = usrnm, Email = model.Email, Address = model.Address, Latitude = latitude, Longitude = longitude};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 await UserManager.AddToRoleAsync(user.Id, "Customer");
                 if (result.Succeeded)
