@@ -36,16 +36,49 @@ namespace Web2.Controllers
 
             return citruses[id];
         }
+        //Schedules
+        [HttpGet]
+        public List<Schedule> getSchedules()
+        {
+            var schedules = dbWrapper.GetSchedules().ToList();
+            return schedules;
+        }
 
         [HttpGet]
-        public List<CustomerTask> GetTasks()
+        public Schedule getScheduleById(int id)
+        {
+            var schedule = dbWrapper.getScheduleById(id);
+            return schedule;
+        }
+        [HttpPost]
+        public HttpResponseMessage addSchedule(Schedule schedule)
+        {
+            dbWrapper.addSchedule(schedule);
+            return this.Request.CreateResponse(HttpStatusCode.Created);
+        }
+        [HttpPost]
+        public HttpResponseMessage updateSchedule(Schedule schedule)
+        {
+            dbWrapper.updateSchedule(schedule);
+            return this.Request.CreateResponse(HttpStatusCode.OK);
+        }
+        [HttpPost]
+        public HttpResponseMessage deleteScheduleById(int? id)
+        {
+            dbWrapper.deleteScheduleById(id);
+            return this.Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        //Tasks
+        [HttpGet]
+        public List<CustomerTask> getTasks()
         {
             var tasks = dbWrapper.GetTasks().ToList();
             return tasks;
         }
 
         [HttpGet]
-        public CustomerTask GetTaskById(int id)
+        public CustomerTask getTaskById(int id)
         {
             var task = dbWrapper.getTaskById(id);
             return task;
