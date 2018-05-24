@@ -10,8 +10,9 @@ namespace Web2.Controllers
 {
     public class CitrusController : ApiController
     {
+        DbWrapper dbWrapper = new DbWrapper();
         // GET api/Citrus
-        public List<Citrus> Get()
+        public List<Citrus> GetCitrus()
         {
             List<Citrus> citruses = new List<Citrus>();
             citruses.Add(new Citrus { id = 0, name = "lemon" });
@@ -24,7 +25,7 @@ namespace Web2.Controllers
         }
 
         // GET api/Citrus/3
-        public Citrus Get(int id)
+        public Citrus GetCitrusById(int id)
         {
             List<Citrus> citruses = new List<Citrus>();
             citruses.Add(new Citrus { id = 0, name = "lemon" });
@@ -35,6 +36,43 @@ namespace Web2.Controllers
 
             return citruses[id];
         }
+
+        [HttpGet]
+        public List<CustomerTask> GetTasks()
+        {
+            var tasks = dbWrapper.GetTasks().ToList();
+            return tasks;
+        }
+
+        [HttpGet]
+        public CustomerTask GetTaskById(int id)
+        {
+            var task = dbWrapper.getTaskById(id);
+            return task;
+        }
+
+        [HttpPost]
+        public HttpResponseMessage addTask(CustomerTask task)
+        {
+            dbWrapper.addTask(task);
+            return this.Request.CreateResponse(HttpStatusCode.Created);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage updateTask(CustomerTask task)
+        {
+            dbWrapper.updateTask(task);
+            return this.Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage deleteTaskById(int id)
+        {
+            dbWrapper.deleteTaskById(id);
+            return this.Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+
 
     }
 }
