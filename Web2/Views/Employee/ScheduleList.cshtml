@@ -5,11 +5,17 @@
     ViewBag.Title = "ScheduleList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <h2>Schedule</h2>
 <td>
     <button onclick="location.href='@Url.Action("ScheduleList", "Employee")';return false;" class="btn btn-default">Schedule</button>
-
+    <input type="button" id="refreshButton" value="REFRESH"/>
+    <script>
+        $("#refreshButton").on("click", function () {
+            console.log("refresh pls");
+            location.reload();
+        });
+    </script>
     <br><br>
 </td>
 
