@@ -3,7 +3,7 @@
   <Table Name="dbo.Relatives" Member="Relatives">
     <Type Name="Relative">
       <Column Name="customer_Id" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="phone_number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="relation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />

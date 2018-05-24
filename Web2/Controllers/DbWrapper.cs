@@ -34,6 +34,12 @@ namespace Web2.Controllers
             dataContext.CustomerTasks.InsertOnSubmit(task);
             dataContext.SubmitChanges();
         }
+        public void addRelative(Relative relative)
+        {
+            var dataContext = new RelativeModelDataContext();
+            dataContext.Relatives.InsertOnSubmit(relative);
+            dataContext.SubmitChanges();
+        }
         public void addSchedule(Schedule schedule)
         {
             var dataContext = new ScheduleModelDataContext();
@@ -76,6 +82,24 @@ namespace Web2.Controllers
             }
         }
 
+        public Relative getRelativeById(int? id)
+        {
+
+            var dataContext = new RelativeModelDataContext();
+            var query = (from m in dataContext.Relatives
+                         where m.Id == id
+                         select m);
+            var relative = query.First();
+            if (relative != null)
+            {
+                return relative;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public void updateTask(CustomerTask task)
         {
             var dataContext = new TaskModelDataContext();
@@ -85,6 +109,19 @@ namespace Web2.Controllers
             query.First().title = task.title;
             query.First().duration = task.duration;
             query.First().description = task.description;
+            dataContext.SubmitChanges();
+        }
+        public void updateRelative(Relative relative)
+        {
+            var dataContext = new RelativeModelDataContext();
+            var query = (from m in dataContext.Relatives
+                         where m.Id == relative.Id
+                         select m);
+            query.First().name = relative.name;
+            query.First().relation = relative.relation;
+            query.First().email = relative.email;
+            query.First().phone_number = relative.phone_number;
+            query.First().customer_Id = relative.customer_Id;
             dataContext.SubmitChanges();
         }
 
@@ -129,6 +166,16 @@ namespace Web2.Controllers
             var relatives = (from m in dataContext.Relatives
                          select m);
             return relatives;
+        }
+
+        public void deleteRelativeById(int? id)
+        {
+            var dataContext = new RelativeModelDataContext();
+            var query = (from m in dataContext.Relatives
+                         where m.Id == id
+                         select m);
+            dataContext.Relatives.DeleteOnSubmit(query.First());
+            dataContext.SubmitChanges();
         }
     }
 }

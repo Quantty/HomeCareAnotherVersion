@@ -408,6 +408,9 @@
     <Content Include="Views\Employee\ScheduleList.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Admin\RelativeList.cshtml" />
+    <Content Include="Views\Admin\DeleteRelative.cshtml" />
+    <Content Include="Views\Admin\CreateRelative.cshtml" />
+    <Content Include="Views\Admin\EditRelative.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804230704470_InitialCreate.resx">

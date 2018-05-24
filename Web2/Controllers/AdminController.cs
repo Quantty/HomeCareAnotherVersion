@@ -77,6 +77,15 @@ namespace Web2.Controllers
             return RedirectToAction("TaskList");
         }
 
+        [HttpPost, ActionName("EditRelative")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditRelative(Relative relative)
+        {
+
+            DBLink.updateRelative(relative);
+            return RedirectToAction("RelativeList");
+        }
+
         [HttpPost, ActionName("DeleteTask")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteTask(CustomerTask task)
@@ -116,7 +125,7 @@ namespace Web2.Controllers
 
             foreach (ApplicationUser user in UserManager.Users)
             {
-                if (!user.Roles.First().Equals("Employee"))
+                if (UserManager.IsInRole(user.Id, "Employee"))
                 {
                     employeeUsers.Add(user);
                 }
@@ -130,7 +139,7 @@ namespace Web2.Controllers
 
             foreach (ApplicationUser user in UserManager.Users)
             {
-                if (!user.Roles.First().Equals("Customer"))
+                if (UserManager.IsInRole(user.Id, "Customer"))
                 {
                     customersUsers.Add(user);
                 }
@@ -241,6 +250,14 @@ namespace Web2.Controllers
             return RedirectToAction("TimeCheck",schedule);
         }
 
+        [HttpPost, ActionName("CreateRelative")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateRelative(Relative relative)
+        {
+            DBLink.addRelative(relative);
+            return RedirectToAction("RelativeList");
+        }
+
 
         [HttpGet]
         public ActionResult TimeCheck(Schedule schedule)
@@ -295,6 +312,14 @@ namespace Web2.Controllers
             return RedirectToAction("ScheduleList");
         }
 
+        [HttpPost, ActionName("DeleteRelative")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteRelative(Relative relative)
+        {
+            DBLink.deleteRelativeById(relative.Id);
+            return RedirectToAction("RelativeList");
+        }
+
 
         public ActionResult EditSchedule(int id)
         {
@@ -304,10 +329,22 @@ namespace Web2.Controllers
             return View(DBLink.getScheduleById(id));
         }
 
+        public ActionResult EditRelative(int id)
+        {
+            ViewBag.customers = getCustomers();
+            return View(DBLink.getRelativeById(id));
+        }
+
         public ActionResult DeleteSchedule(int id)
         {
             var schedule = DBLink.getScheduleById(id);
             return View(schedule);
+        }
+
+        public ActionResult DeleteRelative(int id)
+        {
+            var relative = DBLink.getRelativeById(id);
+            return View(relative);
         }
 
         public ActionResult DetailsSchedule(int id)
@@ -324,6 +361,14 @@ namespace Web2.Controllers
             ViewBag.customers = getCustomers();
             ViewBag.employees = getEmployees();
 
+            return View();
+        }
+
+
+        [HttpGet]
+        public ActionResult CreateRelative()
+        {
+            ViewBag.customers = getCustomers();
             return View();
         }
 
