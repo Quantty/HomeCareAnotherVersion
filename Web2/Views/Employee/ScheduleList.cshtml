@@ -20,16 +20,7 @@
     <br><br>
 </td>
 
-
-<style>
-
-</style>
-
 <script>
-
-    $("#refreshButton").on("click", function () {
-        location.reload();
-    });
     $("#scheduleDate").datepicker({
         dateFormat: "yy-mm-dd",
         onSelect: function (dateText) {
@@ -267,7 +258,6 @@
 
             google.maps.event.addListenerOnce(map, 'idle', function(event) {
                 this.setZoom(map.getZoom()-1);
-
                 if (this.getZoom() > 16) {
                     this.setZoom(16);
                 }
