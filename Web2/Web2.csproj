@@ -370,11 +370,10 @@
     <Content Include="Views\Admin\EditSchedule.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Admin\TimeCheck.cshtml" />
-    <Content Include="Views\Admin\EmployeeSchedules.cshtml" />
-    <Content Include="Views\Employee\ScheduleList.cshtml" />
-    <Content Include="Views\Employee\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Employee\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
