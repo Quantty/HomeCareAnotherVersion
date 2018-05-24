@@ -94,6 +94,7 @@ namespace Web2.Controllers
 
         public async Task<ActionResult> ScheduleListByDate(string date)
         {
+            ViewBag.dateTitle = date;
             var schedules = DBLink.GetSchedules();
             var employeeUsers = getEmployees();
             var customerUsers = getCustomers();

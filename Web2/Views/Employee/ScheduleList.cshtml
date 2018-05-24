@@ -1,16 +1,14 @@
 ﻿@model IEnumerable<Web2.Models.MixViewModel>
 @using GoogleMaps.LocationServices;
 
-
 @{
-    ViewBag.Title = "ScheduleList";
+    //ViewBag.Title = "ScheduleList";
+    ViewBag.Title = ViewBag.dateTitle;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-
 
 <h2>Schedule</h2>
 <td>
@@ -21,6 +19,10 @@
 </td>
 
 <script>
+    $(document).ready(function () {
+        console.log(document.title);
+        $("#scheduleDate").val(document.title);
+    });
     $("#scheduleDate").datepicker({
         dateFormat: "yy-mm-dd",
         onSelect: function (dateText) {
@@ -30,7 +32,7 @@
                 window.location.assign("?date=" + dateText);
         }
     });
-    $("#scheduleDate").on()
+
 </script>
 
 
@@ -238,7 +240,7 @@
             }
 
             let bounds = new google.maps.LatLngBounds();
-            
+
             for (let i = 0; i < visits.length; i++) {
                 let pos = new google.maps.LatLng(visits[i].lat, visits[i].lng);
                 let marker = new google.maps.Marker({
