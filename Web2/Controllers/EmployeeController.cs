@@ -12,6 +12,7 @@ using Web2.Models;
 
 namespace Web2.Controllers
 {
+    [Authorize(Roles = "Employee")]
     public class EmployeeController : Controller
     {
 

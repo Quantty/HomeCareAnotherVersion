@@ -16,6 +16,10 @@ namespace Web2.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string Address { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

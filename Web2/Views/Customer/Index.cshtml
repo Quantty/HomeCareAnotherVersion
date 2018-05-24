@@ -1,51 +1,137 @@
-﻿@model IEnumerable<Web2.Models.Schedule>
+﻿@model Web2.Models.MasterMixViewModel
+@using GoogleMaps.LocationServices;
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@{
+    ViewBag.Title = "Customer's Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Schedule</h2>
+<td>
+    <button onclick="location.href='@Url.Action("Index", "Customer")';return false;" class="btn btn-default">Index</button>
+
+    <br><br>
+</td>
+
+<!--schedule table-->
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.employee_Id)
+            @Html.DisplayName("Date")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.customer_Id)
+            @Html.DisplayName("Time")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.task_Id)
+            @Html.DisplayName("Task")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.date)
+            @Html.DisplayName("Duration")
+        </th>
+        <th></th>
+    </tr>
+    @using Microsoft.AspNet.Identity;
+
+
+    @foreach (var item in Model.mixViewModel)
+    {
+        if (item.schedule.customer_Id == User.Identity.GetUserId())
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.schedule.date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.schedule.time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.task.title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.task.duration)
+                </td>
+                <td></td>
+            </tr>
+        }
+    }
+
+</table>
+
+<!--task table-->
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Title")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.time)
+            @Html.DisplayName("Duration")
+        </th>
+        <th>
+            @Html.DisplayName("Description")
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model.mixViewModel)
+    {
+        if (item.schedule.customer_Id == User.Identity.GetUserId())
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.task.title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.task.duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.task.description)
+                </td>
+                <td></td>
+            </tr>
+        }
+    }
+
+</table>
+
+<!--relative table-->
+<table class="table">
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.employee_Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.customer_Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.task_Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.time)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("Relation")
+        </th>
+        <th>
+            @Html.DisplayName("Email")
+        </th>
+        <th>
+            @Html.DisplayName("Phone Number")
+        </th>
+        <th></th>
     </tr>
-}
+
+    @foreach (var item in Model.relatives)
+    {
+        if (item.customer_Id == User.Identity.GetUserId())
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.relation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phone_number)
+                </td>
+                <td></td>
+            </tr>
+        }
+    }
 
 </table>

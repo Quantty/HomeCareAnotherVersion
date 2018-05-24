@@ -20,9 +20,9 @@ namespace Web2.Models
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-    using System.ComponentModel.DataAnnotations;
-
-    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="HomeCareDatabase")]
+	
+	
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="HomeCareDatabase")]
 	public partial class ScheduleModelDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -81,10 +81,10 @@ namespace Web2.Models
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _Id;
-        [Required(AllowEmptyStrings = false)]
-        private string _employee_Id;
-        [Required(AllowEmptyStrings = false)]
-        private string _customer_Id;
+		
+		private string _employee_Id;
+		
+		private string _customer_Id;
 		
 		private int _task_Id;
 		
@@ -134,8 +134,8 @@ namespace Web2.Models
 				}
 			}
 		}
-        [Required(AllowEmptyStrings = false)]
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_employee_Id", DbType="VarChar(50) NOT NULL  NOT EMPTY", CanBeNull=false)]
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_employee_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string employee_Id
 		{
 			get
@@ -154,8 +154,8 @@ namespace Web2.Models
 				}
 			}
 		}
-        [Required(AllowEmptyStrings = false)]
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customer_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customer_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string customer_Id
 		{
 			get
@@ -174,8 +174,8 @@ namespace Web2.Models
 				}
 			}
 		}
-        [Required(AllowEmptyStrings = false)]
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_task_Id", DbType="Int NOT NULL")]
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_task_Id", DbType="Int NOT NULL")]
 		public int task_Id
 		{
 			get
@@ -194,8 +194,8 @@ namespace Web2.Models
 				}
 			}
 		}
-        [Required(AllowEmptyStrings = false)]
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string date
 		{
 			get
