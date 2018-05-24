@@ -36,6 +36,37 @@ namespace Web2.Controllers
 
             return citruses[id];
         }
+        //Relatives
+        [HttpGet]
+        public List<Relative> GetRelatives()
+        {
+            var relatives = dbWrapper.GetRelatives().ToList();
+            return relatives;
+        }
+        [HttpGet]
+        public Relative getRelativeById(int? id)
+        {
+            var relative = dbWrapper.getRelativeById(id);
+            return relative;
+        }
+        [HttpPost]
+        public HttpResponseMessage addRelative(Relative relative)
+        {
+            dbWrapper.addRelative(relative);
+            return this.Request.CreateResponse(HttpStatusCode.Created);
+        }
+        [HttpPost]
+        public HttpResponseMessage updateRelative(Relative relative)
+        {
+            dbWrapper.updateRelative(relative);
+            return this.Request.CreateResponse(HttpStatusCode.OK);
+        }
+        [HttpPost]
+        public HttpResponseMessage deleteRelativeById(int? id)
+        {
+            dbWrapper.deleteRelativeById(id);
+            return this.Request.CreateResponse(HttpStatusCode.OK);
+        }
         //Schedules
         [HttpGet]
         public List<Schedule> getSchedules()
