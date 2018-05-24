@@ -1,23 +1,47 @@
 ﻿@model IEnumerable<Web2.Models.MixViewModel>
 @using GoogleMaps.LocationServices;
 
+
 @{
     ViewBag.Title = "ScheduleList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+
 <h2>Schedule</h2>
 <td>
     <button onclick="location.href='@Url.Action("ScheduleList", "Employee")';return false;" class="btn btn-default">Schedule</button>
-    <input type="button" id="refreshButton" value="REFRESH"/>
-    <script>
-        $("#refreshButton").on("click", function () {
-            console.log("refresh pls");
-            location.reload();
-        });
-    </script>
+    <input type="button" id="refreshButton" value="REFRESH" />
+    <input type="text" id="scheduleDate" />
     <br><br>
 </td>
+
+
+<style>
+
+</style>
+
+<script>
+
+    $("#refreshButton").on("click", function () {
+        location.reload();
+    });
+    $("#scheduleDate").datepicker({
+        dateFormat: "yy-mm-dd",
+        onSelect: function (dateText) {
+            if (window.location.pathname.endsWith("ScheduleList"))
+                window.location.assign("ScheduleListByDate?date=" + dateText);
+            else
+                window.location.assign("?date=" + dateText);
+        }
+    });
+    $("#scheduleDate").on()
+</script>
+
 
 <!--schedule table-->
 <table class="table">
@@ -129,10 +153,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.customer.Email)
+                    @Html.DisplayFor(modelItem => item.customer.UserName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.customer.UserName)
+                    @Html.DisplayFor(modelItem => item.customer.Email)
                 </td>
                 <td></td>
             </tr>
@@ -208,7 +232,7 @@
             }
 
             let visits = new Array();
-            
+
 
             @foreach (var item in Model)
             {
@@ -218,12 +242,12 @@
                     var lon = item.customer.Longitude.ToString().Replace(",", ".");
 
                     @:visits.push(new RouteVisit("@item.task.title", "@item.schedule.date", "@item.schedule.time", @lat, @lon));
-                    
+
                 }
             }
 
             let bounds = new google.maps.LatLngBounds();
-
+            
             for (let i = 0; i < visits.length; i++) {
                 let pos = new google.maps.LatLng(visits[i].lat, visits[i].lng);
                 let marker = new google.maps.Marker({
