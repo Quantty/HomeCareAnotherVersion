@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Web2.Models.RelativeCustomerModel>
+
+@{
+    ViewBag.Title = "RelativeList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Relatives</h2>
+<td>
+    <button onclick="location.href='@Url.Action("UserTable", "Admin")';return false;" class="btn btn-default">Users</button>
+    <button onclick="location.href='@Url.Action("ScheduleList", "Admin")';return false;" class="btn btn-default">Schedule</button>
+    <button onclick="location.href='@Url.Action("TaskList", "Admin" )';return false;" class="btn btn-default">Tasks</button>
+    <button onclick="location.href='@Url.Action("RelativeList", "Admin")';return false;" class="btn btn-default">Relatives</button>
+
+    <br><br>
+</td>
+
+<p>
+    @Html.ActionLink("Create New", "CreateRelative")
+</p>
+<table class="table">
+    <tr>
+        <th>
+
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("Email")
+        </th>
+        <th>
+            @Html.DisplayName("Phone Number")
+        </th>
+
+        <th>
+            @Html.DisplayName("Relative Customer")
+        </th>
+        <th>
+            @Html.DisplayName("Relation")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.relative.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.relative.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.relative.phone_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.customer.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.relative.relation)
+        </td>
+        <td>
+        <td>
+            @Html.ActionLink("Edit", "EditRelative", new { id = item.relative.Id }) |
+            @Html.ActionLink("Details", "DetailsRelative", new { id = item.relative.Id }) |
+            @Html.ActionLink("Delete", "DeleteRelative", new { id = item.relative.Id })
+        </td>
+    </tr>
+    }
+
+</table>

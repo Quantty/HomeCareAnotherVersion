@@ -10,6 +10,7 @@
     <button onclick="location.href='@Url.Action("UserTable", "Admin")';return false;" class="btn btn-default">Users</button>
     <button onclick="location.href='@Url.Action("ScheduleList", "Admin")';return false;" class="btn btn-default">Schedule</button>
     <button onclick="location.href='@Url.Action("TaskList", "Admin")';return false;" class="btn btn-default">Tasks</button>
+    <button onclick="location.href='@Url.Action("RelativeList", "Admin")';return false;" class="btn btn-default">Relatives</button>
 
     <br><br>
 </td>
@@ -51,7 +52,7 @@
                     }
                     @if (role == "Customer")
                     {
-                        @Html.ActionLink("relatives", "CustomerRelatives", new { id = item.Id })
+                        @Html.ActionLink("relatives", "CustomerRelativeList", new { id = item.Id })
                     }
                 </td>
             </tr>

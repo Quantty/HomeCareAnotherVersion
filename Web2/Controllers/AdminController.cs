@@ -163,6 +163,76 @@ namespace Web2.Controllers
             return View(scheduleList);
         }
 
+        public async Task<ActionResult> EmployeeSchedules(string id)
+        {
+            var schedules = DBLink.GetSchedules();
+            var employeeUsers = getEmployees();
+            var customerUsers = getCustomers();
+
+            List<MixViewModel> scheduleList = new List<MixViewModel>();
+
+            foreach (var schedule in schedules)
+            {
+                MixViewModel mymodel = new MixViewModel();
+                var userE = await UserManager.FindByIdAsync(schedule.employee_Id + "");
+                var userC = await UserManager.FindByIdAsync(schedule.customer_Id + "");
+
+                mymodel.employee = userE;
+                mymodel.schedule = schedule;
+                mymodel.customer = userC;
+                mymodel.task = DBLink.getTaskById(schedule.task_Id);
+
+                if (schedule.employee_Id == id)
+                {//if the employee's id is equal to the id we selected in UserList
+                    scheduleList.Add(mymodel);
+                }
+
+            }
+            return View("ScheduleList", scheduleList);
+        }
+
+        public async Task<ActionResult> RelativeList()
+        {
+            var relatives = DBLink.GetRelatives();
+
+            List<RelativeCustomerModel> relativeCusomerList = new List<RelativeCustomerModel>();
+
+            foreach (var relative in relatives)
+            {
+                RelativeCustomerModel mymodel = new RelativeCustomerModel();
+                var userC = await UserManager.FindByIdAsync(relative.customer_Id + "");
+                
+                mymodel.customer = userC;
+                mymodel.relative = relative;
+
+                relativeCusomerList.Add(mymodel);
+
+            }
+            return View(relativeCusomerList);
+        }
+
+        public async Task<ActionResult> CustomerRelativeList(string id)
+        {
+            var relatives = DBLink.GetRelatives();
+
+            List<RelativeCustomerModel> relativeCustomerList = new List<RelativeCustomerModel>();
+
+            foreach (var relative in relatives)
+            {
+                RelativeCustomerModel mymodel = new RelativeCustomerModel();
+                var userC = await UserManager.FindByIdAsync(relative.customer_Id + "");
+
+                mymodel.customer = userC;
+                mymodel.relative = relative;
+
+                if (relative.customer_Id == id) {
+                    relativeCustomerList.Add(mymodel);
+                }
+
+            }
+            return View("RelativeList", relativeCustomerList);
+        }
+
 
         [HttpPost, ActionName("CreateSchedule")]
         [ValidateAntiForgeryToken]
@@ -335,32 +405,6 @@ namespace Web2.Controllers
             return RedirectToAction("UserTable");
         }
 
-        public async Task<ActionResult> EmployeeSchedules(string id)
-        {
-            var schedules = DBLink.GetSchedules();
-            var employeeUsers = getEmployees();
-            var customerUsers = getCustomers();
-
-            List<MixViewModel> scheduleList = new List<MixViewModel>();
-
-            foreach (var schedule in schedules)
-            {
-                MixViewModel mymodel = new MixViewModel();
-                var userE = await UserManager.FindByIdAsync(schedule.employee_Id + "");
-                var userC = await UserManager.FindByIdAsync(schedule.customer_Id + "");
-
-                mymodel.employee = userE;
-                mymodel.schedule = schedule;
-                mymodel.customer = userC;
-                mymodel.task = DBLink.getTaskById(schedule.task_Id);
-
-                if (schedule.employee_Id == id) {//if the employee's id is equal to the id we selected in UserList
-                    scheduleList.Add(mymodel);
-                }
-
-            }
-            return View("ScheduleList", scheduleList);
-        }
 
 
 
