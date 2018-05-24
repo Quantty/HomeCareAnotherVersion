@@ -13,8 +13,6 @@ namespace Web2.Models
 
         public CustomerTask task { get; set; }
         public Schedule schedule { get; set; }
-        
-        //public Relative relative { get; set; }
      
     }
 }

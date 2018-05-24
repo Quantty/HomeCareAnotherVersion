@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Web2.Models.MixViewModel>
+﻿@model Web2.Models.MasterMixViewModel
 @using GoogleMaps.LocationServices;
 
 @{
@@ -33,7 +33,7 @@
     @using Microsoft.AspNet.Identity;
 
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.mixViewModel)
     {
         if (item.schedule.customer_Id == User.Identity.GetUserId())
         {
@@ -73,7 +73,7 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.mixViewModel)
     {
         if (item.schedule.customer_Id == User.Identity.GetUserId())
         {
@@ -86,6 +86,48 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.task.description)
+                </td>
+                <td></td>
+            </tr>
+        }
+    }
+
+</table>
+
+<!--relative table-->
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("Relation")
+        </th>
+        <th>
+            @Html.DisplayName("Email")
+        </th>
+        <th>
+            @Html.DisplayName("Phone Number")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.relatives)
+    {
+        if (item.customer_Id == User.Identity.GetUserId())
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.relation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phone_number)
                 </td>
                 <td></td>
             </tr>

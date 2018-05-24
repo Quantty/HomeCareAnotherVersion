@@ -159,7 +159,7 @@ namespace Web2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && UserManager.FindByEmail(model.Email) == null)
             {
                 var locationService = new GoogleLocationService();
                 var point = locationService.GetLatLongFromAddress(model.Address);

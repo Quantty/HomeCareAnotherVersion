@@ -82,6 +82,7 @@ namespace Web2.Controllers
         public ActionResult DeleteTask(CustomerTask task)
         {
             DBLink.deleteTaskById(task.Id);
+
             return RedirectToAction("TaskList");
         }
        

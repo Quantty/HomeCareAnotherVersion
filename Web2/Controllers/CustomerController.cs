@@ -56,9 +56,11 @@ namespace Web2.Controllers
 
         public async Task<ActionResult> Index()
         {
+            MasterMixViewModel masterModel = new MasterMixViewModel();
             var schedules = DBLink.GetSchedules();
             var employeeUsers = getEmployees();
             var customerUsers = getCustomers();
+            var relatives = DBLink.GetRelatives();
 
             List<MixViewModel> scheduleList = new List<MixViewModel>();
 
@@ -77,7 +79,10 @@ namespace Web2.Controllers
                 scheduleList.Add(mymodel);
 
             }
-            return View(scheduleList);
+            masterModel.mixViewModel = scheduleList;
+            masterModel.relatives = relatives.ToList();
+
+            return View(masterModel);
         }
     }
 }

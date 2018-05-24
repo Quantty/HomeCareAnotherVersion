@@ -229,10 +229,16 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\MasterMixViewModel.cs" />
     <Compile Include="Models\Citrus.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MixViewModel.cs" />
+    <Compile Include="Models\RelativeModel.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RelativeModel.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Models\ScheduleModel.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -314,6 +320,14 @@
       <LastGenOutput>ScheduleModel.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Models\RelativeModel.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>RelativeModel.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Models\RelativeModel.dbml.layout">
+      <DependentUpon>RelativeModel.dbml</DependentUpon>
+    </None>
     <None Include="Models\ScheduleModel.dbml.layout">
       <DependentUpon>ScheduleModel.dbml</DependentUpon>
     </None>
