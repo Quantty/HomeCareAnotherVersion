@@ -378,6 +378,11 @@ namespace Web2.Controllers
         {
             ApplicationUser user = await UserManager.FindByIdAsync(id);
             await UserManager.DeleteAsync(user);
+            using (System.IO.StreamWriter file =
+                        new System.IO.StreamWriter(@"C:\Users\Public\homecarelog.txt", true))
+            {
+                file.WriteLine(DateTime.Now + " user with id " + id + " deleted");
+            }
             return RedirectToAction("UserTable");
         }
 
@@ -399,6 +404,11 @@ namespace Web2.Controllers
                     await UserManager.AddToRoleAsync(user.Id, roleName);
 
                     ViewBag.Title = "user " + model.Email + " successfully created";
+                    using (System.IO.StreamWriter file =
+                        new System.IO.StreamWriter(@"C:\Users\Public\homecarelog.txt", true))
+                    {
+                        file.WriteLine(DateTime.Now + " user with email " + model.Email + " created");
+                    }
                     return RedirectToAction("UserTable");
                 }
                 ViewBag.Title = "result didn't succeed";
@@ -446,6 +456,11 @@ namespace Web2.Controllers
             if (!result.Succeeded)
             {
                 //throw exception......
+            }
+            using (System.IO.StreamWriter file =
+                        new System.IO.StreamWriter(@"C:\Users\Public\homecarelog.txt", true))
+            {
+                file.WriteLine(DateTime.Now + " user with id " + model.Id + " updated");
             }
             return RedirectToAction("UserTable");
         }
