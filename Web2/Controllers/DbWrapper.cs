@@ -33,18 +33,33 @@ namespace Web2.Controllers
             var dataContext = new TaskModelDataContext();
             dataContext.CustomerTasks.InsertOnSubmit(task);
             dataContext.SubmitChanges();
+            using (System.IO.StreamWriter file =
+                        new System.IO.StreamWriter(@"C:\Users\Public\homecarelog.txt", true))
+            {
+                file.WriteLine(DateTime.Now + " new task with id " + task.Id + " created");
+            }
         }
         public void addRelative(Relative relative)
         {
             var dataContext = new RelativeModelDataContext();
             dataContext.Relatives.InsertOnSubmit(relative);
             dataContext.SubmitChanges();
+            using (System.IO.StreamWriter file =
+                        new System.IO.StreamWriter(@"C:\Users\Public\homecarelog.txt", true))
+            {
+                file.WriteLine(DateTime.Now + " new relative with id " + relative.Id + " created");
+            }
         }
         public void addSchedule(Schedule schedule)
         {
             var dataContext = new ScheduleModelDataContext();
             dataContext.Schedules.InsertOnSubmit(schedule);
             dataContext.SubmitChanges();
+            using (System.IO.StreamWriter file =
+                        new System.IO.StreamWriter(@"C:\Users\Public\homecarelog.txt", true))
+            {
+                file.WriteLine(DateTime.Now + " new schedule with id " + schedule.Id + " created");
+            }
         }
 
         public CustomerTask getTaskById(int? id)
@@ -110,6 +125,11 @@ namespace Web2.Controllers
             query.First().duration = task.duration;
             query.First().description = task.description;
             dataContext.SubmitChanges();
+            using (System.IO.StreamWriter file =
+                        new System.IO.StreamWriter(@"C:\Users\Public\homecarelog.txt", true))
+            {
+                file.WriteLine(DateTime.Now + " task with id " + task.Id + " updated");
+            }
         }
         public void updateRelative(Relative relative)
         {
@@ -123,6 +143,11 @@ namespace Web2.Controllers
             query.First().phone_number = relative.phone_number;
             query.First().customer_Id = relative.customer_Id;
             dataContext.SubmitChanges();
+            using (System.IO.StreamWriter file =
+                        new System.IO.StreamWriter(@"C:\Users\Public\homecarelog.txt", true))
+            {
+                file.WriteLine(DateTime.Now + " relative with id " + relative.Id + " updated");
+            }
         }
 
         public void updateSchedule(Schedule schedule)
@@ -138,6 +163,11 @@ namespace Web2.Controllers
             sched.task_Id = schedule.task_Id;
             sched.time = schedule.time;
             dataContext.SubmitChanges();
+            using (System.IO.StreamWriter file =
+                        new System.IO.StreamWriter(@"C:\Users\Public\homecarelog.txt", true))
+            {
+                file.WriteLine(DateTime.Now + " schedule with id " + schedule.Id + " updated");
+            }
         }
 
         public void deleteTaskById(int? id)
@@ -148,6 +178,11 @@ namespace Web2.Controllers
                          select m);
             dataContext.CustomerTasks.DeleteOnSubmit(query.First());
             dataContext.SubmitChanges();
+            using (System.IO.StreamWriter file =
+                        new System.IO.StreamWriter(@"C:\Users\Public\homecarelog.txt", true))
+            {
+                file.WriteLine(DateTime.Now + " task with id " + id + " deleted");
+            }
         }
 
         public void deleteScheduleById(int? id)
@@ -158,6 +193,11 @@ namespace Web2.Controllers
                          select m);
             dataContext.Schedules.DeleteOnSubmit(query.First());
             dataContext.SubmitChanges();
+            using (System.IO.StreamWriter file =
+                        new System.IO.StreamWriter(@"C:\Users\Public\homecarelog.txt", true))
+            {
+                file.WriteLine(DateTime.Now + " schedule with id " + id + " deleted");
+            }
         }
 
         public IQueryable<Relative> GetRelatives()
@@ -176,6 +216,11 @@ namespace Web2.Controllers
                          select m);
             dataContext.Relatives.DeleteOnSubmit(query.First());
             dataContext.SubmitChanges();
+            using (System.IO.StreamWriter file =
+                        new System.IO.StreamWriter(@"C:\Users\Public\homecarelog.txt", true))
+            {
+                file.WriteLine(DateTime.Now + " relative with id " + id + " deleted");
+            }
         }
     }
 }

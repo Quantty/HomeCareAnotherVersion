@@ -5,7 +5,7 @@ class WebApiConfig
 {
     public static void Register(HttpConfiguration configuration)
     {
-        configuration.Routes.MapHttpRoute("API Default", "api/{controller}/{id}",
+        configuration.Routes.MapHttpRoute("API Default", "api/{controller}/{action}/{id}",
             new { id = RouteParameter.Optional });
         configuration.Formatters.JsonFormatter.MediaTypeMappings
             .Add(new System.Net.Http.Formatting.RequestHeaderMapping("Accept",
