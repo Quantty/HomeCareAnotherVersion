@@ -84,5 +84,33 @@ namespace Web2.Controllers
 
             return View(masterModel);
         }
+        public async Task<ActionResult> ScheduleListByDate(string date)
+        {
+            ViewBag.dateTitle = date;
+            var schedules = DBLink.GetSchedules();
+            var employeeUsers = getEmployees();
+            var customerUsers = getCustomers();
+
+            List<MixViewModel> scheduleList = new List<MixViewModel>();
+
+            foreach (var schedule in schedules)
+            {
+                MixViewModel mymodel = new MixViewModel();
+                var userE = await UserManager.FindByIdAsync(schedule.employee_Id + "");
+                var userC = await UserManager.FindByIdAsync(schedule.customer_Id + "");
+
+                mymodel.employee = userE;
+                mymodel.schedule = schedule;
+                mymodel.customer = userC;
+                mymodel.task = DBLink.getTaskById(schedule.task_Id);
+
+                //if the employee's id is equal to the id we selected in UserList
+                System.Diagnostics.Debug.WriteLine(" schedule.date = " + schedule.date + ", date = " + date);
+                if (schedule.date == date)
+                    scheduleList.Add(mymodel);
+
+            }
+            return View("ScheduleList", scheduleList);
+        }
     }
 }

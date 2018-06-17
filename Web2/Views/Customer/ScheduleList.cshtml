@@ -49,9 +49,7 @@
 </script>
 
 <!--schedule table-->
-<table   class="table table-hover">
-<tr style="width:100%;" >
-    <td>
+
         <table class="table table-responsive">
             <tr>
                 <th>
@@ -109,17 +107,7 @@
             }
 
         </table>
-        </td>
-    <br>
-        <td>
-        <div class="embed-responsive embed-responsive-4by3">
-            <div id="map-container" class="embed-responsive-item">
-                <div id="map">
-                </div>
-            </div>
-        </div>
-            </td>
-    </table>
+
 <br><br>
         <!--task table-->
         <table class="table table-condensed table-responsive table-striped">
@@ -186,113 +174,7 @@
             }
 
         </table>
-
-
-        <style>
-            #map {
-                height: 250px;
-                width: 400px;
-            }
-        </style>
-
-        <hr />
-
-
-        @section scripts {
-            <script>
-        function RouteVisit(name, date, time, lat, lng) {
-            this.name = name;
-            this.date = date;
-            this.time = time;
-            this.lat = lat;
-            this.lng = lng;
-        }
-
-        function createMarker(width, height, radius) {
-            var canvas, context;
-            canvas = document.createElement("canvas");
-            canvas.width = width;
-            canvas.height = height;
-            context = canvas.getContext("2d");
-            context.clearRect(0, 0, width, height);
-            context.fillStyle = "rgba(255,255,0,1)";
-            context.strokeStyle = "rgba(0,0,0,1)";
-            context.beginPath();
-            context.moveTo(radius, 0);
-            context.lineTo(width - radius, 0);
-            context.quadraticCurveTo(width, 0, width, radius);
-            context.lineTo(width, height - radius);
-            context.quadraticCurveTo(width, height, width - radius, height);
-            context.lineTo(radius, height);
-            context.quadraticCurveTo(0, height, 0, height - radius);
-            context.lineTo(0, radius);
-            context.quadraticCurveTo(0, 0, radius, 0);
-            context.closePath();
-            context.fill();
-            context.stroke();
-            return canvas.toDataURL();
-        }
-
-        var map, infoWindow;
-
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'),
-                {
-                    center: { lat: 55, lng: 12 },
-                    zoom: 6
-                });
-            infoWindow = new google.maps.InfoWindow;
-
-            let markerIcon = {
-                url: createMarker(25, 25, 4),
-                labelOrigin: new google.maps.Point(55, 12)
-            }
-
-            let visits = new Array();
-
-
-            @foreach (var item in Model)
-            {
-                if (item.schedule.employee_Id == User.Identity.GetUserId() && item.customer.Address != null) {
-                    System.Diagnostics.Debug.WriteLine("   schedule valid, lat: " + item.customer.Latitude + ", lon: " + item.customer.Longitude);
-                    var lat = item.customer.Latitude.ToString().Replace(",", ".");
-                    var lon = item.customer.Longitude.ToString().Replace(",", ".");
-
-                    @:visits.push(new RouteVisit("@item.task.title", "@item.schedule.date", "@item.schedule.time", @lat, @lon));
-
-                }
-            }
-
-            let bounds = new google.maps.LatLngBounds();
-
-            for (let i = 0; i < visits.length; i++) {
-                let pos = new google.maps.LatLng(visits[i].lat, visits[i].lng);
-                let marker = new google.maps.Marker({
-                    position: pos,
-                    map: map,
-                    clickable: false,
-                    icon: markerIcon,
-                    label: {
-                        text: visits[i].name,
-                        color: "#000000",
-                        fontSize: "12px",
-                        fontWeight: "bold"
-                    }
-                });
-                bounds.extend(pos);
-            }
-
-            google.maps.event.addListenerOnce(map, 'idle', function(event) {
-                this.setZoom(map.getZoom()-1);
-                if (this.getZoom() > 16) {
-                    this.setZoom(16);
-                }
-            });
-
-            map.setCenter(bounds.getCenter());
-            map.fitBounds(bounds);
-        }
-            </script>
+          
             <script async defer
                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAffWabXysXAgZRoXTc-MP5_l6r7CNl-v0&callback=initMap">
             </script>
